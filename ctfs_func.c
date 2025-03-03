@@ -32,10 +32,10 @@ int ctfs_mkfs(int flag){
 #else
 	if(flag & CTFS_MKFS_FLAG_RESET_DAX){
 		printf("ctFS_mkfs: reseting dax...\n");
-		dax_reset("/dev/dax0.0", CT_DAX_ALLOC_SIZE);
+		dax_reset("/dev/dax3.0", CT_DAX_ALLOC_SIZE);
 	}
 	dax_ioctl_init_t frame = {.size = CT_DAX_ALLOC_SIZE};
-	ct_rt.base_addr = (uint64_t)dax_start("/dev/dax0.0", &frame);
+	ct_rt.base_addr = (uint64_t)dax_start("/dev/dax3.0", &frame);
 	ct_rt.mpk[DAX_MPK_DEFAULT] = frame.mpk_default;
 	ct_rt.mpk[DAX_MPK_FILE] = frame.mpk_file;
 	ct_rt.mpk[DAX_MPK_META] = frame.mpk_meta;
@@ -92,7 +92,7 @@ int ctfs_mkfs(int flag){
 int ctfs_init(int flag){
 	memset(&ct_rt, 0, sizeof(ct_rt));
 	dax_ioctl_init_t frame = {.size = CT_DAX_ALLOC_SIZE};
-	ct_rt.base_addr = (uint64_t)dax_start("/dev/dax0.0", &frame);
+	ct_rt.base_addr = (uint64_t)dax_start("/dev/dax3.0", &frame);
 	ct_rt.super_blk = (ct_super_blk_pt)(ct_rt.base_addr);
 	ct_rt.mpk[DAX_MPK_DEFAULT] = frame.mpk_default;
 	ct_rt.mpk[DAX_MPK_FILE] = frame.mpk_file;

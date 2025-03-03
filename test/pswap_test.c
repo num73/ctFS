@@ -17,9 +17,9 @@ int main(int argc, char ** argv){
 		printf("offset %ul \n", offset);
 	}
 	
-	// dax_reset("/dev/dax0.0", CT_DAX_ALLOC_SIZE);
+	// dax_reset("/dev/dax3.0", CT_DAX_ALLOC_SIZE);
 	dax_ioctl_init_t frame = {.size = CT_DAX_ALLOC_SIZE};
-	void* base_addr = dax_start("/dev/dax0.0", &frame);
+	void* base_addr = dax_start("/dev/dax3.0", &frame);
 	dax_grant_access(frame.mpk_default);
 	char ret = getchar();
 	if(ret == 's'){
